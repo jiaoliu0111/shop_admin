@@ -1,4 +1,10 @@
 <div>
+  <!-- 搜索框 -->
+  <div style="margin-top: 15px;">
+    <el-input placeholder="请输入搜索内容" v-model="searchText" >
+      <el-button slot="append" icon="el-icon-search" @click="search"></el-button>
+    </el-input>
+  </div>
   <!-- 表格 -->
   <el-table :data="usersData" style="width: 100%">
     <el-table-column prop="username" label="姓名" width="180"> </el-table-column>
@@ -7,7 +13,7 @@
     <el-table-column prop="mg_state" label="用户状态"> </el-table-column>
     <el-table-column  label="操作"> </el-table-column>
   </el-table>
-  <!-- 分页 动态绑定的属性和事件都是参照文档，并非自己随意编制-->
+  <!-- 分页 注意：动态绑定的属性和事件都是参照文档，并非自己随意编制-->
   <el-pagination
     background
     layout="prev, pager, next"

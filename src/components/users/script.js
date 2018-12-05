@@ -8,19 +8,20 @@ export default {
       // tel
       total: 0,
       pagesize: 2,
-      pagenum: 1
+      pagenum: 1,
+      searchText: ''
     }
   },
   created () {
     this.getUsersList() // ???this指代什么
   },
   methods: {
-    getUsersList (pagenum = 1, pagesize = 2, query = '') {
+    getUsersList (pagenum = 1, query = '') {
       axios.get('http://localhost:8888/api/private/v1/users', {
         params: {
           query,
           pagenum,
-          pagesize
+          pagesize: 2
         },
         headers: {
           Authorization: localStorage.getItem('token')
@@ -38,10 +39,13 @@ export default {
       })
     },
     //  切换页码
-    changePage (curPage) {
+    changePage (curPage) { // 回调参数：当前页
       console.log('当前页是：', curPage)
-      this.getUsersList(curPage) // 1- 切换渲染新页面 2- 在请求渲染成功的回调里面把返回的pagenum赋值给动态绑定的current-page
+      this.getUsersList(curPage, this.searchText) // 1- 切换渲染新页面 2- 在请求渲染成功的回调里面把返回的pagenum赋值给动态绑定的current-page
+    }, // 分页也要考虑查询@@@
+    search () {
+      console.log('查询条件为：', this.searchText)
+      this.getUsersList(1, this.searchText)
     }
-
   }
 }
