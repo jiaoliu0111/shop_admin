@@ -7,6 +7,8 @@ import VueRouter from 'vue-router'
 // 5- 导入组件，配置路由
 import Home from '@/components/home/Home'
 import Login from '@/components/login/Login'
+import Users from '@/components/users/Users'
+import Roles from '@/components/roles/Roles'
 
 // 2- 将路由作为Vue的插件安装
 Vue.use(VueRouter)
@@ -15,7 +17,14 @@ Vue.use(VueRouter)
 const router = new VueRouter({
   routes: [
     {path: '/login', component: Login},
-    {path: '/home', component: Home}
+    {
+      path: '/home',
+      component: Home,
+      children: [
+        {path: '/users', component: Users},
+        {path: '/roles', component: Roles}
+      ]
+    }
   ]
 })
 //  添加路由守卫，用来实现登录访问限制
