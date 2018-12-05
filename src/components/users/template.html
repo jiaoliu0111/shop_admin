@@ -7,10 +7,14 @@
     <el-table-column prop="mg_state" label="用户状态"> </el-table-column>
     <el-table-column  label="操作"> </el-table-column>
   </el-table>
-  <!-- 分页 -->
+  <!-- 分页 动态绑定的属性和事件都是参照文档，并非自己随意编制-->
   <el-pagination
     background
     layout="prev, pager, next"
-    :total="100">
+    :total="total"
+    :page-size="pagesize"
+    :current-page="pagenum"
+    @current-change="changePage"
+    >
   </el-pagination>
 </div>
